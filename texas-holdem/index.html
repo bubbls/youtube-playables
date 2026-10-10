@@ -15,7 +15,37 @@
       height: 100%;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@88100dcb4652fef9fe4ff4d76514e7fa84c0e3e3/ytgame.js" nonce="o0jVYgjThAvzHKfWgEGCeA"></script>
+  <script nonce="o0jVYgjThAvzHKfWgEGCeA">
+if (!window.ytgame) {
+  window.ytgame = {
+    SDK_VERSION: "standalone",
+    IN_PLAYABLES_ENV: false,
+    SdkError: function (t) { this.errorType = t; this.message = ""; },
+    SdkErrorType: { UNDEFINED: 0, GAMEAPI_UNDEFINED: 1 },
+    game: {
+      firstFrameReady: function () {},
+      gameReady: function () {},
+      loadData: function () { return Promise.resolve(localStorage.getItem("texas-holdem-save") || ""); },
+      saveData: function (data) { localStorage.setItem("texas-holdem-save", data); return Promise.resolve(); }
+    },
+    engagement: { sendScore: function () { return Promise.resolve(); } },
+    ads: {
+      requestAd: function () { return Promise.resolve(3); },
+      requestInterstitialAd: function () { return Promise.resolve(); },
+      AdResult: { UNKNOWN: 0, SHOWED: 1, REJECTED: 3, DISMISSED: 2 }
+    },
+    health: { logError: function () {}, logWarning: function () {} },
+    system: {
+      getLanguage: function () { return Promise.resolve("en"); },
+      isAudioEnabled: function () { return true; },
+      onAudioEnabledChange: function () { return function () {}; },
+      onPause: function () { return function () {}; },
+      onResume: function () { return function () {}; }
+    }
+  };
+  window.ytgamehelper = { myConsoleLog: function () {} };
+}
+</script>
   <script defer="defer" src="main.js?825b1708244249bfdba2" nonce="o0jVYgjThAvzHKfWgEGCeA"></script>
 </head>
 

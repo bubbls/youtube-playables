@@ -13159,7 +13159,8 @@
                                 switch (t.prev = t.next) {
                                 case 0:
                                     return t.prev = 0,
-                                    t.next = 3;
+                                    t.next = 3,
+                                    window.ytgame.game.loadData();
                                 case 3:
                                     e = t.sent,
                                     this.data = e ? JSON.parse(e) : {},
@@ -13189,7 +13190,8 @@
                                 switch (t.prev = t.next) {
                                 case 0:
                                     return t.prev = 0,
-                                    t.next = 3;
+                                    t.next = 3,
+                                    window.ytgame.game.saveData(JSON.stringify(this.data));
                                 case 3:
                                     t.next = 9;
                                     break;
@@ -13929,7 +13931,8 @@
                             for (; ; )
                                 switch (t.prev = t.next) {
                                 case 0:
-                                    return t.next = 2
+                                    return t.next = 2,
+                                    window.ytgame.system.getLanguage();
                                 case 2:
                                     return t.abrupt("return", t.sent);
                                 case 3:
@@ -112796,7 +112799,7 @@
         if (!t)
             throw new Error("Automatic publicPath is not supported in this browser");
         t = t.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/"),
-        o.p = t
+        o.p = new URL(".", document.baseURI).href
     }
     )(),
     ( () => {

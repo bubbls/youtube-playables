@@ -10,7 +10,37 @@
 
   <title>YT Game Wrapper WebGL Template</title>
   <link rel="stylesheet" href="TemplateData/style.css" nonce="DfuyJh7yV1knGRZ2apY0RQ">
-  <script src="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@main/ytgame.js" nonce="DfuyJh7yV1knGRZ2apY0RQ">// Load YT Game API code</script>
+  <script nonce="DfuyJh7yV1knGRZ2apY0RQ">
+if (!window.ytgame) {
+  window.ytgame = {
+    SDK_VERSION: "standalone",
+    IN_PLAYABLES_ENV: false,
+    SdkError: function (t) { this.errorType = t; this.message = ""; },
+    SdkErrorType: { UNDEFINED: 0, GAMEAPI_UNDEFINED: 1 },
+    game: {
+      firstFrameReady: function () {},
+      gameReady: function () {},
+      loadData: function () { return Promise.resolve(localStorage.getItem("match-triple-3d-save") || ""); },
+      saveData: function (data) { localStorage.setItem("match-triple-3d-save", data); return Promise.resolve(); }
+    },
+    engagement: { sendScore: function () { return Promise.resolve(); } },
+    ads: {
+      requestAd: function () { return Promise.resolve(3); },
+      requestInterstitialAd: function () { return Promise.resolve(); },
+      AdResult: { UNKNOWN: 0, SHOWED: 1, REJECTED: 3, DISMISSED: 2 }
+    },
+    health: { logError: function () {}, logWarning: function () {} },
+    system: {
+      getLanguage: function () { return Promise.resolve("en"); },
+      isAudioEnabled: function () { return true; },
+      onAudioEnabledChange: function () { return function () {}; },
+      onPause: function () { return function () {}; },
+      onResume: function () { return function () {}; }
+    }
+  };
+  window.ytgamehelper = { myConsoleLog: function () {} };
+}
+</script>
 </head>
 
 <body>
@@ -60,7 +90,7 @@
       // updateBannerVisibility();
     }
 
-    var buildUrl = "Build";
+    var buildUrl = new URL("Build", document.baseURI).href;
     var loaderUrl = buildUrl + "/mtu.loader.js";
     var config = {
       dataUrl: buildUrl + "/mtu.data",
@@ -237,7 +267,7 @@
     }
 
     // Path 1: Use this path if no decompression of your .wasm, .data, .js files are needed
-    InitUnitySection();
+    loadResources(InitUnitySection);
 
     // Path 2: Use this path to Load resources (.wasm, .data) that are Zipped and need to be decompressed
     // if you dont use compresseion its best to comment out Path 1 and uncomment Path 2.

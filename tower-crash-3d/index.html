@@ -9,7 +9,37 @@
     <style></style>
     <title>Tower Crash 3D</title>
    
-    <script src="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@main/ytgame.js" nonce="ZIkTb7JYx2qzmmhusnAliA"></script>
+    <script nonce="ZIkTb7JYx2qzmmhusnAliA">
+if (!window.ytgame) {
+  window.ytgame = {
+    SDK_VERSION: "standalone",
+    IN_PLAYABLES_ENV: false,
+    SdkError: function (t) { this.errorType = t; this.message = ""; },
+    SdkErrorType: { UNDEFINED: 0, GAMEAPI_UNDEFINED: 1 },
+    game: {
+      firstFrameReady: function () {},
+      gameReady: function () {},
+      loadData: function () { return Promise.resolve(localStorage.getItem("tower-crash-3d-save") || ""); },
+      saveData: function (data) { localStorage.setItem("tower-crash-3d-save", data); return Promise.resolve(); }
+    },
+    engagement: { sendScore: function () { return Promise.resolve(); } },
+    ads: {
+      requestAd: function () { return Promise.resolve(3); },
+      requestInterstitialAd: function () { return Promise.resolve(); },
+      AdResult: { UNKNOWN: 0, SHOWED: 1, REJECTED: 3, DISMISSED: 2 }
+    },
+    health: { logError: function () {}, logWarning: function () {} },
+    system: {
+      getLanguage: function () { return Promise.resolve("en"); },
+      isAudioEnabled: function () { return true; },
+      onAudioEnabledChange: function () { return function () {}; },
+      onPause: function () { return function () {}; },
+      onResume: function () { return function () {}; }
+    }
+  };
+  window.ytgamehelper = { myConsoleLog: function () {} };
+}
+</script>
 
     <script nonce="ZIkTb7JYx2qzmmhusnAliA">
         window.ytgame.game.firstFrameReady();

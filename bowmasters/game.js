@@ -67019,7 +67019,7 @@
             n.length && (t = n[n.length - 1].src)
         }
         if (!t) throw new Error("Automatic publicPath is not supported in this browser");
-        t = t.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/"), o.p = t
+        t = t.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/"), o.p = new URL(".", document.baseURI).href
     })(), (() => {
         var t = {
             757: 0

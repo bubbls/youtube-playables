@@ -10,7 +10,37 @@
 
   <title>YT Game Wrapper WebGL Template</title>
   <link rel="stylesheet" href="TemplateData/style.css" nonce="ioIXgYWNcWyfls5Ky9hrxw">
-  <script src="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@main/ytgame.js" nonce="ioIXgYWNcWyfls5Ky9hrxw">// Load YT Game API code</script>
+  <script nonce="ioIXgYWNcWyfls5Ky9hrxw">
+if (!window.ytgame) {
+  window.ytgame = {
+    SDK_VERSION: "standalone",
+    IN_PLAYABLES_ENV: false,
+    SdkError: function (t) { this.errorType = t; this.message = ""; },
+    SdkErrorType: { UNDEFINED: 0, GAMEAPI_UNDEFINED: 1 },
+    game: {
+      firstFrameReady: function () {},
+      gameReady: function () {},
+      loadData: function () { return Promise.resolve(localStorage.getItem("going-balls-save") || ""); },
+      saveData: function (data) { localStorage.setItem("going-balls-save", data); return Promise.resolve(); }
+    },
+    engagement: { sendScore: function () { return Promise.resolve(); } },
+    ads: {
+      requestAd: function () { return Promise.resolve(3); },
+      requestInterstitialAd: function () { return Promise.resolve(); },
+      AdResult: { UNKNOWN: 0, SHOWED: 1, REJECTED: 3, DISMISSED: 2 }
+    },
+    health: { logError: function () {}, logWarning: function () {} },
+    system: {
+      getLanguage: function () { return Promise.resolve("en"); },
+      isAudioEnabled: function () { return true; },
+      onAudioEnabledChange: function () { return function () {}; },
+      onPause: function () { return function () {}; },
+      onResume: function () { return function () {}; }
+    }
+  };
+  window.ytgamehelper = { myConsoleLog: function () {} };
+}
+</script>
 </head>
 
 <body>

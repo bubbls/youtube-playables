@@ -1,6 +1,5 @@
 {
   "urls": [
-    "../assets/audio/audiosprite.mp3",
     "../assets/audio/audiosprite.ogg"
   ],
   "sprite": {

@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <base href="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@fea22b681fcc55bd6d5b059e2843120d3fbf7dd6/slice%20it%20all/">
+  <base href="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@main/slice-it-all/">
   <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 
 
@@ -24,7 +24,37 @@
        <script src="https://g.glance-cdn.com/public/content/games/xiaomi/gamesAd.js"></script>
        <script src="/VOODOO-H5SDK.glance.js"></script> -->
 
-  <script src="https://cdn.jsdelivr.net/gh/bubbls/youtube-playables@3e6b306051ae5de94ccc90d2ef7fa6df8c892bd0/ytgame.js" nonce="qACc2RpVQ7Dqt26Ksjm7yA"></script>
+  <script nonce="qACc2RpVQ7Dqt26Ksjm7yA">
+if (!window.ytgame) {
+  window.ytgame = {
+    SDK_VERSION: "standalone",
+    IN_PLAYABLES_ENV: false,
+    SdkError: function (t) { this.errorType = t; this.message = ""; },
+    SdkErrorType: { UNDEFINED: 0, GAMEAPI_UNDEFINED: 1 },
+    game: {
+      firstFrameReady: function () {},
+      gameReady: function () {},
+      loadData: function () { return Promise.resolve(localStorage.getItem("slice-it-all-save") || ""); },
+      saveData: function (data) { localStorage.setItem("slice-it-all-save", data); return Promise.resolve(); }
+    },
+    engagement: { sendScore: function () { return Promise.resolve(); } },
+    ads: {
+      requestAd: function () { return Promise.resolve(3); },
+      requestInterstitialAd: function () { return Promise.resolve(); },
+      AdResult: { UNKNOWN: 0, SHOWED: 1, REJECTED: 3, DISMISSED: 2 }
+    },
+    health: { logError: function () {}, logWarning: function () {} },
+    system: {
+      getLanguage: function () { return Promise.resolve("en"); },
+      isAudioEnabled: function () { return true; },
+      onAudioEnabledChange: function () { return function () {}; },
+      onPause: function () { return function () {}; },
+      onResume: function () { return function () {}; }
+    }
+  };
+  window.ytgamehelper = { myConsoleLog: function () {} };
+}
+</script>
   <script src="./VOODOO-H5SDK.youtube.js" nonce="qACc2RpVQ7Dqt26Ksjm7yA"></script>
   <style>
     * {
